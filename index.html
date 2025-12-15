@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceLink - Oferta dla SunSol</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gradient-start: #00D9FF;
+            --gradient-mid: #7B2CBF;
+            --gradient-end: #9D4EDD;
+            --bg-light: #F8F9FA;
+            --bg-white: #FFFFFF;
+            --text-dark: #1A1A1A;
+            --text-gray: #6B7280;
+            --text-light: #9CA3AF;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: var(--bg-light);
+        }
+
+        .section {
+            min-height: 100vh;
+            padding: 80px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            background: var(--bg-light);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        /* Logo Section */
+        .logo-section {
+            background: var(--bg-light);
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .logos-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .logo-section .logo-sunsol {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(0, 217, 255, 0.3));
+        }
+
+        .logo-section .logo-voicelink {
+            max-width: 250px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(0, 217, 255, 0.3));
+        }
+
+        .logo-section .offer-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #000000;
+            margin-top: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 768px) {
+            .logos-container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .logo-section .offer-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Problem Section */
+
+        .problem-box {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .problem-box::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 23px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            z-index: -1;
+        }
+
+        .problem-box h2 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .problem-box p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            margin-bottom: 18px;
+        }
+
+        .problem-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-box .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .stat-box .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Solution Steps */
+        .solution-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .solution-step {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .solution-step::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            z-index: -1;
+        }
+
+        .solution-step::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            background: white;
+            z-index: -1;
+        }
+
+        .solution-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        /* Process Steps - Enhanced */
+        .process-steps-enhanced {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin: 50px 0;
+            position: relative;
+        }
+
+        .process-step-enhanced {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .process-step-enhanced:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .process-step-enhanced:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .process-step-enhanced:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 35px rgba(0, 217, 255, 0.2);
+        }
+
+        .step-icon {
+            width: 65px;
+            height: 65px;
+            min-width: 65px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.7rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h3 {
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+
+        .step-content p {
+            color: var(--text-gray);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Technical Requirements */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .tech-grid .tech-card:nth-child(1) {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .tech-grid .tech-card:nth-child(2) {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .tech-grid .tech-card:nth-child(3) {
+            grid-column: 3;
+            grid-row: 1;
+        }
+
+        .tech-grid .tech-card:nth-child(4) {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        @media (max-width: 968px) {
+            .tech-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tech-grid .tech-card:nth-child(n) {
+                grid-column: auto;
+                grid-row: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .tech-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            z-index: -1;
+        }
+
+        .tech-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            background: white;
+            z-index: -1;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            background: #F5F5F5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tech-icon svg {
+            width: 35px;
+            height: 35px;
+        }
+
+        .tech-icon svg path {
+            fill: url(#featureGradient);
+        }
+
+        /* Calculator */
+        .calculator-section {
+            background: var(--bg-light);
+        }
+
+        .calculators-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .calculator-box,
+        .roi-calculator-box {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .calculator-box::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 23px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            z-index: -1;
+        }
+
+        .calc-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .calc-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 6px;
+        }
+
+        .calc-header .price-tag {
+            font-size: 1.1rem;
+            color: var(--gradient-mid);
+            font-weight: 700;
+        }
+
+        .calc-header p {
+            font-size: 0.85rem;
+            margin-top: 6px !important;
+        }
+
+        .calc-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .calc-item {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .calc-item label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%);
+            cursor: pointer;
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%);
+            cursor: pointer;
+            border: none;
+        }
+
+        .calc-result {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%);
+            color: white;
+            padding: 18px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .calc-result-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-bottom: 6px;
+        }
+
+        .calc-result-value {
+            font-size: 1.7rem;
+            font-weight: 800;
+        }
+
+        .calc-breakdown {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 0.8rem;
+        }
+
+        .roi-calculator-box::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 21px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            z-index: -1;
+        }
+
+        .roi-result-item {
+            background: var(--bg-light);
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .roi-result-item.total {
+            background: linear-gradient(135deg, #00D9FF 0%, #7B2CBF 50%, #FF6B9D 100%);
+            color: white;
+            padding: 15px 40px 40px 40px;
+            margin-top: 45px;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: flex-start;
+            position: relative;
+            min-height: 220px;
+        }
+
+        .roi-result-item.total .roi-result-label {
+            font-size: 2rem;
+            font-weight: 700;
+            width: 100%;
+            margin: 0 0 auto 0;
+            padding-top: 0;
+        }
+
+        .roi-result-item.total .roi-result-value {
+            font-size: 4rem;
+            font-weight: 900;
+            width: 100%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .roi-result-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .roi-result-value {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        @media (max-width: 968px) {
+            .calculators-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .calculator-box,
+            .roi-calculator-box {
+                padding: 20px;
+                max-width: 100%;
+            }
+
+            .calc-header h3 {
+                font-size: 1.3rem;
+            }
+
+            .calc-header .price-tag {
+                font-size: 1.1rem;
+            }
+
+            .calc-row {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .calc-item {
+                padding: 15px;
+            }
+
+            .calc-result {
+                padding: 18px;
+            }
+
+            .calc-result-value {
+                font-size: 1.7rem;
+            }
+        }
+
+        /* Monthly Simulation Section */
+        .monthly-simulation {
+            background: var(--bg-light);
+        }
+
+        .simulation-description {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .months-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .month-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .month-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .month-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--bg-light);
+        }
+
+        .month-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .month-total {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .month-input {
+            margin-bottom: 20px;
+        }
+
+        .month-input label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .month-input input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--bg-light);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .month-input input:focus {
+            outline: none;
+            border-color: var(--gradient-mid);
+        }
+
+        .month-input input[readonly] {
+            background: var(--bg-light);
+            cursor: default;
+            color: var(--text-dark);
+        }
+
+        .month-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: var(--bg-light);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .breakdown-row.label {
+            background: transparent;
+            font-weight: 600;
+            color: var(--text-gray);
+            padding: 5px 10px;
+        }
+
+        .breakdown-row.total {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%);
+            color: white;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        .breakdown-label {
+            color: var(--text-gray);
+        }
+
+        .breakdown-value {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .breakdown-row.total .breakdown-value {
+            color: white;
+        }
+
+        .simulation-summary {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .simulation-summary::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 23px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            z-index: -1;
+        }
+
+        .summary-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--text-dark);
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .summary-stat {
+            text-align: center;
+            padding: 20px;
+            background: var(--bg-light);
+            border-radius: 15px;
+        }
+
+        .summary-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+
+        .summary-stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @media (max-width: 768px) {
+            .months-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .month-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .summary-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Explanation Box */
+        .explanation-box {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: 40px auto 0;
+            position: relative;
+        }
+
+        .explanation-box::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 23px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            z-index: -1;
+        }
+
+        .explanation-box h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .explanation-box p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-gray);
+            text-align: center;
+        }
+
+        .explanation-highlight {
+            color: var(--gradient-mid);
+            font-weight: 700;
+        }
+
+        /* Benefits Section */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .benefits-grid .benefit-item:nth-child(1) {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .benefits-grid .benefit-item:nth-child(2) {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .benefits-grid .benefit-item:nth-child(3) {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .benefits-grid .benefit-item:nth-child(4) {
+            grid-column: 3;
+            grid-row: 1;
+        }
+
+        .benefits-grid .benefit-item:nth-child(5) {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .benefits-grid .benefit-item:nth-child(6) {
+            grid-column: 3;
+            grid-row: 2;
+        }
+
+        @media (max-width: 768px) {
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .benefits-grid .benefit-item:nth-child(n) {
+                grid-column: 1;
+                grid-row: auto;
+            }
+        }
+
+        .benefit-item {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            background: #F5F5F5;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+
+        .benefit-icon svg {
+            width: 35px;
+            height: 35px;
+        }
+
+        .benefit-icon svg path {
+            fill: url(#featureGradient);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .problem-box {
+                padding: 25px;
+            }
+
+            .problem-box h2 {
+                font-size: 1.8rem;
+            }
+
+            .problem-box p {
+                font-size: 1rem;
+            }
+
+            .calc-row {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step-enhanced {
+                flex-direction: column !important;
+                padding: 25px;
+                gap: 20px;
+            }
+
+            .step-icon {
+                width: 55px;
+                height: 55px;
+                min-width: 55px;
+                font-size: 1.5rem;
+            }
+
+            .step-content h3 {
+                font-size: 1.2rem;
+            }
+
+            .step-content p {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Summary Section */
+        .summary-section {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.08) 0%, rgba(123, 44, 191, 0.08) 100%);
+            padding: 80px 40px;
+        }
+
+        .summary-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .summary-box {
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .summary-box::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            z-index: -1;
+        }
+
+        .summary-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .summary-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+        }
+
+        .summary-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .summary-points {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .summary-point {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .summary-point-icon {
+            width: 24px;
+            height: 24px;
+            min-width: 24px;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-top: 2px;
+        }
+
+        .summary-point-text {
+            flex: 1;
+        }
+
+        .summary-point-text h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .summary-point-text p {
+            font-size: 0.95rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .summary-price-box {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            padding: 35px;
+            border-radius: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .summary-price-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .summary-price-value {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+        }
+
+        .summary-price-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .summary-price-control {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .summary-price-control label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            opacity: 0.95;
+            font-weight: 600;
+        }
+
+        .summary-price-control .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .summary-price-control .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+        }
+
+        .summary-price-control .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        .summary-price-note {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 968px) {
+            .summary-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .summary-section {
+                padding: 60px 20px;
+            }
+
+            .summary-box {
+                padding: 30px;
+            }
+
+            .summary-title {
+                font-size: 2rem;
+            }
+
+            .summary-price-value {
+                font-size: 2.5rem;
+            }
+
+            .summary-price-box > div[style*="grid"] {
+                grid-template-columns: 1fr !important;
+                gap: 25px !important;
+            }
+        }
+    </style>
+    <svg width="0" height="0" style="position: absolute;">
+        <defs>
+            <linearGradient id="featureGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#00D9FF;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#7B2CBF;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#9D4EDD;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+</head>
+<body>
+    <!-- Logo Section -->
+    <section class="section logo-section">
+        <div class="container">
+            <div class="logos-container">
+                <img src="images/logo.png" alt="VoiceLink" class="logo-voicelink">
+                <img src="sunsol.png" alt="SunSol" class="logo-sunsol">
+            </div>
+            <div class="offer-title">Oferta Usługi VoiceLink dla SunSol</div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section problem-section" id="problem">
+        <div class="container">
+            <div class="problem-box">
+                <h2>Kwalifikacja leadów dla SunSol</h2>
+                <p>
+                    SunSol posiada bazę <strong>30 000 leadów</strong>, którą firma zgromadziła w poprzednich latach. 
+                    W pierwszym etapie planowana jest praca z <strong>3000 leadami</strong>, aby przetestować proces i zmaksymalizować jego skuteczność.
+                </p>
+                <p>
+                    Wyzwaniem jest skuteczna kwalifikacja tych leadów i przekazanie sprzedawcom w SunSol kontaktów do osób, 
+                    które rzeczywiście są zainteresowane spotkaniem. Tradycyjne metody ręcznej kwalifikacji wymagają ogromnego nakładu czasu i zasobów, 
+                    a sprzedawcy nie powinni tracić czasu na rozmowy z osobami niezainteresowanymi. Potrzebne jest rozwiązanie, które automatycznie 
+                    skontaktuje się z każdym leadem, przeprowadzi profesjonalną kwalifikację i przekazuje do dalszej pracy tylko te kontakty, 
+                    które mają realny potencjał sprzedażowy.
+                </p>
+                <p>
+                    <strong>Rezultat:</strong> Wartościowa baza leadów nie jest efektywnie wykorzystywana, a sprzedawcy w SunSol nie otrzymują 
+                    wystarczającej liczby dobrze zakwalifikowanych kontaktów do osób zainteresowanych spotkaniem, co ogranicza możliwości sprzedażowe firmy.
+                </p>
+                <div class="problem-stats">
+                    <div class="stat-box">
+                        <div class="stat-number">30 000</div>
+                        <div class="stat-label">Leadów w bazie</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">3 000</div>
+                        <div class="stat-label">Leadów w I etapie</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">5-25%</div>
+                        <div class="stat-label">Potencjalna konwersja</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="section" id="solution">
+        <div class="container">
+            <h2>Rozwiązanie: Asystent AI VoiceLink</h2>
+            <p style="text-align: center; font-size: 1.2rem; color: var(--text-gray); margin-bottom: 50px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Nasz asystent głosowy AI automatycznie kontaktuje się z każdym leadem z bazy, 
+                prowadzi naturalną rozmowę, kwalifikuje leady i przekazuje numery telefonów zainteresowanych osób do sprzedawców w SunSol.
+            </p>
+            <div class="solution-steps">
+                <div class="solution-step">
+                    <div class="step-number">1</div>
+                    <h3>Automatyczne dzwonienie</h3>
+                    <p>Asystent AI automatycznie dzwoni do każdego leada z bazy, wykorzystując naturalny głos i inteligentne skrypty rozmów.</p>
+                </div>
+                <div class="solution-step">
+                    <div class="step-number">2</div>
+                    <h3>Rozpoznawanie intencji</h3>
+                    <p>AI analizuje odpowiedzi rozmówcy, rozpoznaje poziom zainteresowania i dostosowuje rozmowę do sytuacji.</p>
+                </div>
+                <div class="solution-step">
+                    <div class="step-number">3</div>
+                    <h3>Odpowiedzi na pytania</h3>
+                    <p>Asystent odpowiada na typowe pytania dotyczące oferty SunSol, korzystając z przygotowanej bazy wiedzy.</p>
+                </div>
+                <div class="solution-step">
+                    <div class="step-number">4</div>
+                    <h3>Kwalifikowanie leadów</h3>
+                    <p>Asystent zadaje pytania kwalifikujące leady, aby określić poziom zainteresowania i ustalić, czy osoba jest zainteresowana spotkaniem ze sprzedawcą.</p>
+                </div>
+                <div class="solution-step">
+                    <div class="step-number">5</div>
+                    <h3>Zbieranie informacji</h3>
+                    <p>Dla zainteresowanych leadów asystent zbiera kluczowe informacje potrzebne sprzedawcom: preferowany czas kontaktu, zakres zainteresowania, dodatkowe uwagi.</p>
+                </div>
+                <div class="solution-step">
+                    <div class="step-number">6</div>
+                    <h3>Przekazywanie kontaktów</h3>
+                    <p>Kwalifikowane leady są automatycznie przekazywane do Google Sheets wraz z numerami telefonów i zebranymi informacjami, gotowe do kontaktu przez sprzedawców.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Steps Section -->
+    <section class="section" id="process">
+        <div class="container">
+            <h2>Etapy współpracy</h2>
+            <div class="process-steps-enhanced">
+                <div class="process-step-enhanced">
+                    <div class="step-icon">1</div>
+                    <div class="step-content">
+                        <h3>Spotkanie kick-off</h3>
+                        <p>Omawiamy szczegóły kampanii kwalifikacyjnej, analizujemy bazę leadów i określamy kryteria kwalifikacji. Przedstawiamy możliwości asystenta AI i dopasowujemy rozwiązanie do potrzeb SunSol.</p>
+                    </div>
+                </div>
+                <div class="process-step-enhanced">
+                    <div class="step-icon">2</div>
+                    <div class="step-content">
+                        <h3>Przygotowanie skryptów i bazy wiedzy</h3>
+                        <p>Wspólnie tworzymy scenariusze rozmów dostosowane do oferty SunSol, wybieramy głos asystenta i przygotowujemy bazę wiedzy z odpowiedziami na najczęstsze pytania klientów. Definiujemy kryteria kwalifikacji leadów.</p>
+                    </div>
+                </div>
+                <div class="process-step-enhanced">
+                    <div class="step-icon">3</div>
+                    <div class="step-content">
+                        <h3>Tworzenie i testowanie agenta</h3>
+                        <p>Budujemy asystenta AI zgodnie z ustaleniami, przeprowadzamy testy rozmów i dopracowujemy szczegóły. Zapewniamy, że rozmowy brzmią naturalnie i profesjonalnie, a kwalifikacja jest skuteczna.</p>
+                    </div>
+                </div>
+                <div class="process-step-enhanced">
+                    <div class="step-icon">4</div>
+                    <div class="step-content">
+                        <h3>Akceptacja przez SunSol</h3>
+                        <p>Przedstawiamy gotowego asystenta do akceptacji. Po zatwierdzeniu przez zespół SunSol przechodzimy do integracji technicznej z Google Sheets.</p>
+                    </div>
+                </div>
+                <div class="process-step-enhanced">
+                    <div class="step-icon">5</div>
+                    <div class="step-content">
+                        <h3>Integracja z Google Sheets</h3>
+                        <p>Konfigurujemy integrację z Google Sheets, która automatycznie zapisuje kwalifikowane leady z numerami telefonów i zebranymi informacjami. Sprzedawcy w SunSol otrzymują natychmiastowy dostęp do zakwalifikowanych kontaktów.</p>
+                    </div>
+                </div>
+                <div class="process-step-enhanced">
+                    <div class="step-icon">6</div>
+                    <div class="step-content">
+                        <h3>Uruchomienie kampanii</h3>
+                        <p>Wczytujemy bazę 3000 leadów w formacie CSV i uruchamiamy automatyczne rozmowy. Kampania działa 24/7, systematycznie kontaktując się z każdym leadem, kwalifikując ich i przekazując numery zainteresowanych osób do Google Sheets.</p>
+                    </div>
+                </div>
+                <div class="process-step-enhanced">
+                    <div class="step-icon">7</div>
+                    <div class="step-content">
+                        <h3>Monitoring i optymalizacja</h3>
+                        <p>Na bieżąco monitorujemy wyniki kampanii, analizujemy jakość rozmów i skuteczność kwalifikacji. Wprowadzamy optymalizacje i zapewniamy ciągłe doskonalenie procesu przekazywania leadów do sprzedawców.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Requirements Section -->
+    <section class="section" id="technical">
+        <div class="container">
+            <h2>Wymagania techniczne</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2ZM18 20H6V4H13V9H18V20Z" fill="url(#featureGradient)"/>
+                        </svg>
+                    </div>
+                    <h3>Przekazywanie leadów przez CSV</h3>
+                    <p>Baza leadów musi być przekazana w formacie CSV z kolumnami: imię, nazwisko, numer telefonu. Wszystkie dane muszą być zgodne z wymogami RODO - leady muszą wyrazić zgodę na kontakt telefoniczny.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 8H17V6C17 3.24 14.76 1 12 1S7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM12 3C13.66 3 15 4.34 15 6V8H9V6C9 4.34 10.34 3 12 3ZM18 20H6V10H18V20Z" fill="url(#featureGradient)"/>
+                        </svg>
+                    </div>
+                    <h3>Zgodność z RODO</h3>
+                    <p>Wszystkie dane przetwarzane są zgodnie z wymogami RODO. Leadów informujemy o nagrywaniu rozmów i przetwarzaniu danych. Zapewniamy pełną transparentność i zgodność z przepisami.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 14C13.1 14 14 13.1 14 12V5C14 3.9 13.1 3 12 3C10.9 3 10 3.9 10 5V12C10 13.1 10.9 14 12 14ZM17.2 11C17.2 13.3 15.3 15.2 13 15.2V17H16V19H8V17H11V15.2C8.7 15.2 6.8 13.3 6.8 11H8.8C8.8 12.2 9.8 13.2 11 13.2C12.2 13.2 13.2 12.2 13.2 11H17.2Z" fill="url(#featureGradient)"/>
+                        </svg>
+                    </div>
+                    <h3>Nagrywanie rozmów</h3>
+                    <p>Wszystkie rozmowy są nagrywane w celach jakościowych i szkoleniowych. Nagrania są bezpiecznie przechowywane i dostępne dla zespołu SunSol do analizy i optymalizacji procesu kwalifikacji.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 4H5C3.89 4 3 4.9 3 6V20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20ZM7 11H9V13H7V11ZM11 11H13V13H11V11ZM15 11H17V13H15V11ZM7 15H9V17H7V15ZM11 15H13V17H11V15ZM15 15H17V17H15V15Z" fill="url(#featureGradient)"/>
+                        </svg>
+                    </div>
+                    <h3>Integracja z Google Sheets</h3>
+                    <p>Kwalifikowane leady są automatycznie zapisywane w Google Sheets wraz z numerami telefonów i zebranymi podczas rozmowy informacjami. Sprzedawcy w SunSol mają natychmiastowy dostęp do gotowych kontaktów do osób zainteresowanych spotkaniem.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="section calculator-section" id="calculator">
+        <div class="container">
+            <h2>Kalkulator kosztów i ROI</h2>
+            <div class="calculators-container">
+                <div class="calculator-box">
+                <div class="calc-header">
+                    <h3>Koszt wdrożenia</h3>
+                    <div class="price-tag">3 000 zł netto</div>
+                    <p style="color: var(--text-gray); margin-top: 10px;">za stworzenie i wdrożenie asystenta AI</p>
+                </div>
+                
+                <div class="calc-row">
+                    <div class="calc-item">
+                        <label for="leadsSlider">Ilość leadów: <span id="leadsValue">3000</span></label>
+                        <input type="range" id="leadsSlider" min="500" max="30000" step="100" value="3000" class="slider">
+                    </div>
+                    <div class="calc-item">
+                        <label for="conversionSlider">Konwersja na kwalifikowane leady: <span id="conversionValue">20</span>%</label>
+                        <input type="range" id="conversionSlider" min="5" max="50" step="1" value="20" class="slider">
+                    </div>
+                </div>
+
+                <div class="calc-row">
+                    <div class="calc-item">
+                        <label for="minutesSlider">Ilość minut: <span id="minutesValue">4500</span> <span style="font-size: 0.85rem; color: var(--text-gray);">(1 zł x minuta)</span></label>
+                        <input type="range" id="minutesSlider" min="0" max="45000" step="50" value="4500" class="slider">
+                    </div>
+                    <div class="calc-item">
+                        <label>Przekazane kontakty: <span id="contactsCount">600</span></label>
+                    </div>
+                </div>
+
+                <div class="calc-result">
+                    <div class="calc-result-label">Koszt utrzymania asystenta w całej kampanii</div>
+                    <div class="calc-result-value" id="campaignCost">4 500 zł</div>
+                    <div class="calc-breakdown">
+                        <div class="breakdown-item">
+                            <span>Minuty rozmów:</span>
+                            <span id="costMinutes">4 500 zł</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>VoiceLink success fee (15 zł x <span id="contactsCountDisplay">600</span> przekazanych kontaktów):</span>
+                            <span id="voiceLinkCost">9 000 zł</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-result" style="background: linear-gradient(135deg, var(--gradient-mid) 0%, var(--gradient-end) 100%); margin-top: 20px;">
+                    <div class="calc-result-label">Koszt całej kampanii</div>
+                    <div class="calc-result-value" id="totalCost">16 500 zł</div>
+                    <div class="calc-breakdown">
+                        <div class="breakdown-item">
+                            <span>Wdrożenie:</span>
+                            <span id="implementationCostDisplay">3 000 zł</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Utrzymanie asystenta:</span>
+                            <span id="campaignCostDisplay">4 500 zł</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>VoiceLink success fee:</span>
+                            <span id="voiceLinkCostDisplay">9 000 zł</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- ROI Calculator -->
+                <div class="roi-calculator-box">
+                    <div class="calc-header">
+                        <h3>Kalkulator ROI</h3>
+                    </div>
+                    
+                    <div class="calc-item">
+                        <label for="profitPerClientSlider">Zysk z jednego klienta: <span id="profitPerClientValue">5000</span> zł</label>
+                        <input type="range" id="profitPerClientSlider" min="1000" max="20000" step="100" value="5000" class="slider">
+                    </div>
+
+                    <div class="calc-item" style="margin-top: 20px;">
+                        <label for="clientConversionSlider">Konwersja kontaktów na klientów: <span id="clientConversionValue">25</span>%</label>
+                        <input type="range" id="clientConversionSlider" min="5" max="50" step="1" value="25" class="slider">
+                    </div>
+
+                    <div style="margin-top: 30px;"></div>
+
+                    <div class="roi-result-item">
+                        <span class="roi-result-label">Przekazanych kontaktów</span>
+                        <span class="roi-result-value" id="roiContactsCount">600</span>
+                    </div>
+
+                    <div class="roi-result-item">
+                        <span class="roi-result-label">Podpisanych klientów</span>
+                        <span class="roi-result-value" id="roiClientsCount">150</span>
+                    </div>
+
+                    <div class="roi-result-item">
+                        <span class="roi-result-label">Zysk ze sprzedaży</span>
+                        <span class="roi-result-value" id="roiProfit">750 000 zł</span>
+                    </div>
+
+                    <div class="roi-result-item total">
+                        <span class="roi-result-label">ROI</span>
+                        <span class="roi-result-value" id="roiValue">714 350 zł</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Explanation Box -->
+            <div class="explanation-box">
+                <h3>Dlaczego te stawki?</h3>
+                <p>
+                    Ze względu na <span class="explanation-highlight">inną formę usługi</span> (kwalifikacja leadów i przekazywanie kontaktów zamiast umawiania spotkań), 
+                    zastosowaliśmy <span class="explanation-highlight">obniżenie success fee ze 100 zł do 15 zł za przekazany kontakt</span> oraz 
+                    <span class="explanation-highlight">podwyższenie ceny za minutę rozmowy z 0,7 zł do 1 zł</span>. 
+                    Ten model cenowy lepiej odzwierciedla wartość usługi i zapewnia transparentność kosztów.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Monthly Simulation Section -->
+    <section class="section monthly-simulation" id="monthly-simulation">
+        <div class="container">
+            <h2>Symulacja kosztów miesięcznych</h2>
+            <p class="simulation-description">
+                Poniżej możesz zobaczyć szczegółowy rozkład kosztów dla poszczególnych miesięcy od rozpoczęcia kampanii. 
+                Symulacja pokazuje koszty wdrożenia, utrzymania agenta oraz utrzymania numeru w miesiącach bez aktywnych leadów.
+                <strong>Koszty przedstawione poniżej nie uwzględniają success fee.</strong>
+            </p>
+            
+            <div class="months-grid" id="monthsGrid">
+                <!-- Miesiące będą generowane przez JavaScript -->
+            </div>
+
+            <div class="simulation-summary">
+                <div class="summary-title">Podsumowanie symulacji</div>
+                <div class="summary-stats">
+                    <div class="summary-stat">
+                        <div class="summary-stat-label">Łączna liczba leadów</div>
+                        <div class="summary-stat-value" id="totalLeadsSummary">11 000</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="summary-stat-label">Łączny koszt kampanii</div>
+                        <div class="summary-stat-value" id="totalCostSummary">8 840 zł</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="summary-stat-label">Średni koszt miesięczny</div>
+                        <div class="summary-stat-value" id="avgCostSummary">2 210 zł</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section" id="benefits">
+        <div class="container">
+            <h2>Dodatkowe korzyści</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM19 19H5V5H19V19ZM7 10H9V17H7V10ZM11 7H13V17H11V7ZM15 13H17V17H15V13Z" fill="url(#featureGradient)"/>
+                        </svg>
+                    </div>
+                    <h3>Miesięczne raporty</h3>
+                    <p>Regularne podsumowania wyników kampanii z analizą skuteczności kwalifikacji leadów i jakości rozmów.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 4V1L8 5L12 9V6C15.31 6 18 8.69 18 12C18 13.01 17.75 13.97 17.3 14.8L18.76 16.26C19.54 15.03 20 13.57 20 12C20 7.58 16.42 4 12 4ZM12 18C8.69 18 6 15.31 6 12C6 10.99 6.25 10.03 6.7 9.2L5.24 7.74C4.46 8.97 4 10.43 4 12C4 16.42 7.58 20 12 20V23L16 19L12 15V18Z" fill="url(#featureGradient)"/>
+                        </svg>
+                    </div>
+                    <h3>Optymalizacja</h3>
+                    <p>W trakcie testów asystenta przeprowadzamy optymalizację skryptów i procesów kwalifikacji, aby zapewnić maksymalną skuteczność kampanii przed jej uruchomieniem.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H6L4 18V4H20V16ZM7 9H17V11H7V9ZM7 12H15V14H7V12ZM7 6H17V8H7V6Z" fill="url(#featureGradient)"/>
+                        </svg>
+                    </div>
+                    <h3>Wsparcie techniczne</h3>
+                    <p>Zespół wsparcia dostępny przez cały czas trwania kampanii, gotowy do pomocy w każdej chwili.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 6L18.29 8.29L13.41 13.17L9.41 9.17L2 16.59L3.41 18L9.41 12L13.41 16L19.71 9.71L22 12V6H16Z" fill="url(#featureGradient)"/>
+                        </svg>
+                    </div>
+                    <h3>Skalowalność</h3>
+                    <p>Możliwość łatwego zwiększenia liczby leadów lub rozszerzenia kampanii na kolejne partie z bazy 30 000 kontaktów.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM13 17H11V15H13V17ZM13 13H11V7H13V13Z" fill="url(#featureGradient)"/>
+                        </svg>
+                    </div>
+                    <h3>Wysoka jakość rozmów</h3>
+                    <p>Naturalny głos AI i inteligentne skrypty zapewniają profesjonalne i skuteczne rozmowy z każdym leadem, maksymalizując skuteczność kwalifikacji.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 4H5C3.89 4 3 4.9 3 6V20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20ZM7 11H9V13H7V11ZM11 11H13V13H11V11ZM15 11H17V13H15V11ZM7 15H9V17H7V15ZM11 15H13V17H11V15ZM15 15H17V17H15V15Z" fill="url(#featureGradient)"/>
+                        </svg>
+                    </div>
+                    <h3>Automatyczne przekazywanie do Google Sheets</h3>
+                    <p>Kwalifikowane leady z numerami telefonów są automatycznie dodawane do Google Sheets, zapewniając sprzedawcom w SunSol natychmiastowy dostęp do gotowych kontaktów do osób zainteresowanych spotkaniem.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summary Section -->
+    <section class="section summary-section" id="summary">
+        <div class="container summary-container">
+            <div class="summary-box">
+                <h2 class="summary-title">Podsumowanie oferty</h2>
+                <p class="summary-subtitle">Kompleksowe rozwiązanie do automatycznej kwalifikacji leadów dla SunSol</p>
+                
+                <div class="summary-content">
+                    <div class="summary-points">
+                        <div class="summary-point">
+                            <div class="summary-point-icon">✓</div>
+                            <div class="summary-point-text">
+                                <h4>Automatyczna kwalifikacja</h4>
+                                <p>Asystent AI automatycznie kontaktuje się z każdym leadem, prowadzi profesjonalną rozmowę i kwalifikuje zainteresowane osoby.</p>
+                            </div>
+                        </div>
+                        <div class="summary-point">
+                            <div class="summary-point-icon">✓</div>
+                            <div class="summary-point-text">
+                                <h4>Integracja z Google Sheets</h4>
+                                <p>Kwalifikowane leady z numerami telefonów są automatycznie przekazywane do Google Sheets, gotowe do kontaktu przez sprzedawców.</p>
+                            </div>
+                        </div>
+                        <div class="summary-point">
+                            <div class="summary-point-icon">✓</div>
+                            <div class="summary-point-text">
+                                <h4>Pełne wsparcie</h4>
+                                <p>Kompleksowe wdrożenie, optymalizacja, monitoring i wsparcie techniczne przez cały czas trwania kampanii.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-price-box">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 20px;">
+                            <div>
+                                <div class="summary-price-label" style="font-size: 0.9rem; margin-bottom: 15px;">Koszt pierwszego miesiąca</div>
+                                <div class="summary-price-value" style="font-size: 2.5rem; margin-bottom: 15px; text-align: center; font-variant-numeric: tabular-nums;">7 500 zł</div>
+                                <div style="font-size: 0.85rem; opacity: 0.9; line-height: 1.8;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                        <span>Wdrożenie:</span>
+                                        <span style="font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; display: inline-block; width: 90px;">3 000 zł</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <span>Utrzymanie:</span>
+                                        <span style="font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; display: inline-block; width: 90px;">4 500 zł</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="summary-price-label" style="font-size: 0.9rem; margin-bottom: 15px;">Koszt kolejnych miesięcy</div>
+                                <div class="summary-price-value" style="font-size: 2.5rem; margin-bottom: 15px; text-align: center; font-variant-numeric: tabular-nums;">4 500 zł</div>
+                                <div style="font-size: 0.85rem; opacity: 0.9; line-height: 1.8;">
+                                    <div style="margin-bottom: 8px; text-align: center;">Tylko utrzymanie</div>
+                                    <div style="text-align: center;">
+                                        <span>(dla <strong style="font-variant-numeric: tabular-nums;">3000</strong> leadów)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary-price-note" style="margin-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.3); padding-top: 20px;">
+                            <em>Success fee (15 zł za przekazany kontakt) płatne osobno</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Calculator logic
+        const leadsSlider = document.getElementById('leadsSlider');
+        const conversionSlider = document.getElementById('conversionSlider');
+        const minutesSlider = document.getElementById('minutesSlider');
+
+        const leadsValue = document.getElementById('leadsValue');
+        const conversionValue = document.getElementById('conversionValue');
+        const minutesValue = document.getElementById('minutesValue');
+        const contactsCountEl = document.getElementById('contactsCount');
+        const contactsCountDisplayEl = document.getElementById('contactsCountDisplay');
+
+        const campaignCostEl = document.getElementById('campaignCost');
+        const costMinutesEl = document.getElementById('costMinutes');
+        const voiceLinkCostEl = document.getElementById('voiceLinkCost');
+        const totalCostEl = document.getElementById('totalCost');
+        const implementationCostDisplayEl = document.getElementById('implementationCostDisplay');
+        const campaignCostDisplayEl = document.getElementById('campaignCostDisplay');
+        const voiceLinkCostDisplayEl = document.getElementById('voiceLinkCostDisplay');
+
+        function formatNumber(num) {
+            return Math.round(num).toLocaleString('pl-PL');
+        }
+
+        function updateCalculator() {
+            const leads = parseInt(leadsSlider.value);
+            const conversion = parseInt(conversionSlider.value);
+            const minutes = parseInt(minutesSlider.value);
+
+            // Calculate contacts (qualified leads)
+            const contacts = Math.round(leads * (conversion / 100));
+
+            // Update display values
+            leadsValue.textContent = formatNumber(leads);
+            conversionValue.textContent = conversion;
+            minutesValue.textContent = formatNumber(minutes);
+            contactsCountEl.textContent = formatNumber(contacts);
+            contactsCountDisplayEl.textContent = formatNumber(contacts);
+
+            // Calculate costs
+            const costPerMinute = 1;
+            const costPerContact = 15;
+
+            const costMinutes = minutes * costPerMinute;
+            const voiceLinkCost = contacts * costPerContact;
+
+            const campaignCost = costMinutes;
+            const implementationCost = 3000;
+            const totalCost = implementationCost + campaignCost + voiceLinkCost;
+
+            // Update UI
+            costMinutesEl.textContent = formatNumber(costMinutes) + ' zł';
+            voiceLinkCostEl.textContent = formatNumber(voiceLinkCost) + ' zł';
+            campaignCostEl.textContent = formatNumber(campaignCost) + ' zł';
+            totalCostEl.textContent = formatNumber(totalCost) + ' zł';
+            implementationCostDisplayEl.textContent = formatNumber(implementationCost) + ' zł';
+            campaignCostDisplayEl.textContent = formatNumber(campaignCost) + ' zł';
+            voiceLinkCostDisplayEl.textContent = formatNumber(voiceLinkCost) + ' zł';
+
+            // Update ROI calculator
+            updateROI(contacts, totalCost);
+        }
+
+        // ROI Calculator logic
+        const profitPerClientSlider = document.getElementById('profitPerClientSlider');
+        const clientConversionSlider = document.getElementById('clientConversionSlider');
+        const profitPerClientValue = document.getElementById('profitPerClientValue');
+        const clientConversionValue = document.getElementById('clientConversionValue');
+        const roiContactsCountEl = document.getElementById('roiContactsCount');
+        const roiClientsCountEl = document.getElementById('roiClientsCount');
+        const roiProfitEl = document.getElementById('roiProfit');
+        const roiValueEl = document.getElementById('roiValue');
+
+        function updateROI(contacts, totalCost) {
+            const profitPerClient = parseInt(profitPerClientSlider.value);
+            const clientConversion = parseInt(clientConversionSlider.value);
+
+            // Calculate clients
+            const clients = Math.round(contacts * (clientConversion / 100));
+            
+            // Calculate profit
+            const profit = clients * profitPerClient;
+            
+            // Calculate ROI (profit - total cost)
+            const roi = profit - totalCost;
+
+            // Update UI
+            roiContactsCountEl.textContent = formatNumber(contacts);
+            roiClientsCountEl.textContent = formatNumber(clients);
+            roiProfitEl.textContent = formatNumber(profit) + ' zł';
+            roiValueEl.textContent = formatNumber(roi) + ' zł';
+        }
+
+        // Auto-update minutes when leads change (1 lead = 1.5 minutes)
+        leadsSlider.addEventListener('input', () => {
+            const leads = parseInt(leadsSlider.value);
+            const estimatedMinutes = Math.round(leads * 1.5);
+            minutesSlider.value = estimatedMinutes;
+            updateCalculator();
+        });
+
+        // Update calculator on slider change
+        conversionSlider.addEventListener('input', updateCalculator);
+        minutesSlider.addEventListener('input', updateCalculator);
+
+        // Update ROI on slider change
+        profitPerClientSlider.addEventListener('input', () => {
+            profitPerClientValue.textContent = formatNumber(parseInt(profitPerClientSlider.value));
+            const leads = parseInt(leadsSlider.value);
+            const conversion = parseInt(conversionSlider.value);
+            const minutes = parseInt(minutesSlider.value);
+            const contacts = Math.round(leads * (conversion / 100));
+            const costMinutes = minutes * 1;
+            const voiceLinkCost = contacts * 15;
+            const campaignCost = costMinutes;
+            const implementationCost = 3000;
+            const totalCost = implementationCost + campaignCost + voiceLinkCost;
+            updateROI(contacts, totalCost);
+        });
+
+        clientConversionSlider.addEventListener('input', () => {
+            clientConversionValue.textContent = parseInt(clientConversionSlider.value);
+            const leads = parseInt(leadsSlider.value);
+            const conversion = parseInt(conversionSlider.value);
+            const minutes = parseInt(minutesSlider.value);
+            const contacts = Math.round(leads * (conversion / 100));
+            const costMinutes = minutes * 1;
+            const voiceLinkCost = contacts * 15;
+            const campaignCost = costMinutes;
+            const implementationCost = 3000;
+            const totalCost = implementationCost + campaignCost + voiceLinkCost;
+            updateROI(contacts, totalCost);
+        });
+
+        // Initial ROI update
+        profitPerClientValue.textContent = formatNumber(parseInt(profitPerClientSlider.value));
+        clientConversionValue.textContent = parseInt(clientConversionSlider.value);
+        updateROI(600, 16500); // Initial values
+
+        // Initial calculation
+        updateCalculator();
+
+        // Monthly Simulation Logic
+        const monthsData = [
+            { name: 'Styczeń', leads: 3000 },
+            { name: 'Luty', leads: 3000 },
+            { name: 'Marzec', leads: 0 },
+            { name: 'Kwiecień', leads: 5000 }
+        ];
+
+        const implementationCost = 3000;
+        const costPerMinute = 1;
+        const minutesPerLead = 1.5;
+        const phoneMaintenanceCost = 20;
+
+        function calculateMonthCost(leads, isFirstMonth) {
+            const minutes = Math.round(leads * minutesPerLead);
+            const agentCost = minutes * costPerMinute;
+            const impl = isFirstMonth ? implementationCost : 0;
+            const phoneMaintenance = phoneMaintenanceCost;
+            const total = impl + agentCost + phoneMaintenance;
+
+            return {
+                implementation: impl,
+                agentCost: agentCost,
+                phoneMaintenance: phoneMaintenance,
+                total: total,
+                minutes: minutes
+            };
+        }
+
+        function renderMonthCard(monthData, index) {
+            const isFirstMonth = index === 0;
+            const cost = calculateMonthCost(monthData.leads, isFirstMonth);
+            const monthId = `month-${index}`;
+
+            return `
+                <div class="month-card">
+                    <div class="month-header">
+                        <div class="month-name">${monthData.name}</div>
+                        <div class="month-total">${formatNumber(cost.total)} zł</div>
+                    </div>
+                    <div class="month-input">
+                        <label for="${monthId}-leads">Ilość leadów:</label>
+                        <input type="number" id="${monthId}-leads" min="0" max="30000" step="100" value="${monthData.leads}" readonly data-month-index="${index}">
+                    </div>
+                    <div class="month-breakdown">
+                        <div class="breakdown-row label">
+                            <span>Szczegóły kosztów:</span>
+                        </div>
+                        ${cost.implementation > 0 ? `
+                            <div class="breakdown-row">
+                                <span class="breakdown-label">Koszt wdrożenia:</span>
+                                <span class="breakdown-value">${formatNumber(cost.implementation)} zł</span>
+                            </div>
+                        ` : ''}
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">Koszt minut (${formatNumber(cost.minutes)} min × 1 zł):</span>
+                            <span class="breakdown-value">${formatNumber(cost.agentCost)} zł</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span class="breakdown-label">Utrzymanie numeru:</span>
+                            <span class="breakdown-value">${formatNumber(cost.phoneMaintenance)} zł</span>
+                        </div>
+                        <div class="breakdown-row total">
+                            <span>Koszt całkowity:</span>
+                            <span>${formatNumber(cost.total)} zł</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateMonthlySimulation() {
+            const monthsGrid = document.getElementById('monthsGrid');
+            monthsGrid.innerHTML = monthsData.map((month, index) => renderMonthCard(month, index)).join('');
+        }
+
+        function updateSummary() {
+            let totalLeads = 0;
+            let totalCost = 0;
+
+            monthsData.forEach((month, index) => {
+                totalLeads += month.leads;
+                const cost = calculateMonthCost(month.leads, index === 0);
+                totalCost += cost.total;
+            });
+
+            const avgCost = monthsData.length > 0 ? totalCost / monthsData.length : 0;
+
+            document.getElementById('totalLeadsSummary').textContent = formatNumber(totalLeads);
+            document.getElementById('totalCostSummary').textContent = formatNumber(totalCost) + ' zł';
+            document.getElementById('avgCostSummary').textContent = formatNumber(Math.round(avgCost)) + ' zł';
+        }
+
+        // Initialize monthly simulation
+        updateMonthlySimulation();
+        updateSummary();
+    </script>
+</body>
+</html>
+
